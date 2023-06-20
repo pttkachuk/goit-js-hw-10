@@ -32,7 +32,7 @@ function handlerGetCat() {
     elements.error.style.disaply = 'none';
     fetchCatByBreed(catSelectedById).then((data) => {
         console.log(data);
-        elements.catInfo.style.display = 'block';
+        elements.catInfo.style.display = 'flex';
         elements.catInfo.innerHTML = createMarkup(data);
     }).catch(() => {
         Notiflix.Notify.failure('Oops! Something went wrong! Try reloading the page!');
@@ -45,9 +45,11 @@ function handlerGetCat() {
 
 function createMarkup(array) {
     return array.map(({ url, breeds: [{ name, description, temperament }] }) => {
-        return `<img src="${url}" alt="${name}" width="500px">
-      <h2>${name}</h2>
-      <h3>${temperament}</h3>
-      <p>${description}</p>`
+        return `<img class="cat-img"src="${url}" alt="${name}"">
+        <div class="cat-text">
+      <h2 class="cat-name">${name}</h2>
+      <h3 class="cat-temp">${temperament}</h3>
+      <p class="cat-desc">${description}</p>
+      </div>`
     }).join("");
 };
